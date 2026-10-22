@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ORBITA — внедрение искусственного интеллекта в бизнес</title>
+  <meta name="description" content="ORBITA проектирует и внедряет ИИ-решения для бизнеса: ассистенты, агенты, компьютерное зрение и прогнозная аналитика. Первый результат через 3 недели.">
+  <meta name="theme-color" content="#000000">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3CradialGradient id='s' cx='34%25' cy='28%25' r='78%25'%3E%3Cstop offset='0' stop-color='%23ffe0c4'/%3E%3Cstop offset='.3' stop-color='%23ff8a3c'/%3E%3Cstop offset='.65' stop-color='%23e5480c'/%3E%3Cstop offset='1' stop-color='%235a1500'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cg transform='rotate(-22 16 16)'%3E%3Cpath d='M2.5 16a13.5 4.6 0 0 1 27 0' fill='none' stroke='%23ede7df' stroke-opacity='.35' stroke-width='1.6'/%3E%3Ccircle cx='16' cy='16' r='7.6' fill='url(%23s)'/%3E%3Cpath d='M29.5 16a13.5 4.6 0 0 1-27 0' fill='none' stroke='%23ede7df' stroke-width='1.8'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;500;600&family=Unbounded:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <radialGradient id="logoSphere" cx="34%" cy="28%" r="78%">
+      <stop offset="0" stop-color="#ffe0c4"/>
+      <stop offset=".28" stop-color="#ff8a3c"/>
+      <stop offset=".62" stop-color="#e5480c"/>
+      <stop offset="1" stop-color="#5a1500"/>
+    </radialGradient>
+    <linearGradient id="logoRing" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ede7df" stop-opacity=".25"/>
+      <stop offset=".55" stop-color="#ede7df"/>
+      <stop offset="1" stop-color="#ede7df" stop-opacity=".35"/>
+    </linearGradient>
+  </defs>
+  <symbol id="i-logo" viewBox="0 0 32 32">
+    <g transform="rotate(-22 16 16)">
+      <path d="M2.5 16a13.5 4.6 0 0 1 27 0" fill="none" stroke="#ede7df" stroke-opacity=".28" stroke-width="1.3"/>
+      <circle cx="16" cy="16" r="7.6" fill="url(#logoSphere)"/>
+      <path d="M29.5 16a13.5 4.6 0 0 1-27 0" fill="none" stroke="url(#logoRing)" stroke-width="1.6" stroke-linecap="round"/>
+      <circle cx="24.7" cy="19.5" r="1.7" fill="#ffb37a"/>
+    </g>
+  </symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-tg" viewBox="0 0 24 24"><path d="M21.2 4.6 3.4 11.5c-1 .4-1 1.7 0 2l4.4 1.4 1.7 5.3c.2.7 1.1.9 1.6.4l2.5-2.4 4.6 3.4c.6.4 1.4.1 1.6-.6l3-14.6c.2-.9-.7-1.6-1.6-1.3ZM9.4 14.5l7.9-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+  <symbol id="i-vk" viewBox="0 0 24 24"><path d="M3 7.2h3.3c.3 3.5 1.8 5.3 3 5.7V7.2h3.1v3.3c1.2-.1 2.5-1.5 3-3.3h3.1c-.4 2.1-1.9 3.7-3 4.4 1.1.5 2.9 1.9 3.6 4.8h-3.4c-.6-1.9-2-3.1-3.3-3.3v3.3h-.4C7.2 16.4 3.3 13.5 3 7.2Z" fill="currentColor"/></symbol>
+  <symbol id="i-yt" viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 9.2v5.6l4.8-2.8Z" fill="currentColor"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.8l-5.2 2.8 1-5.8-4.3-4.1 5.9-.8Z" fill="currentColor"/></symbol>
+</svg>
+
+<div class="grid-lines" aria-hidden="true"><div class="wrap grid-lines__inner"><i></i><i></i><i></i><i></i><i></i></div></div>
+
+<a class="skip" href="#main">Перейти к содержанию</a>
+
+<header class="header" id="header">
+  <div class="header__inner wrap">
+    <a class="logo" href="#top" aria-label="ORBITA, на главную">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><use href="#i-logo"/></svg>
+      <span>ORBITA</span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Основная навигация">
+      <a href="#services">Услуги</a>
+      <a href="#process">Как работаем</a>
+      <a href="#cases">Кейсы</a>
+      <a href="#pricing">Стоимость</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+
+    <div class="header__aside">
+      <span class="clock" aria-label="Время в Москве">Москва, <time id="clock">--:--</time></span>
+      <a class="btn btn--primary btn--sm" href="#contact">Обсудить проект</a>
+      <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav"><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- Первый экран -->
+  <section class="hero" id="top">
+    <div class="hero__glow" aria-hidden="true"></div>
+
+    <div class="hero__word" aria-hidden="true">
+      <div class="hero__word-meta wrap">
+        <span>Москва, с 2019 года</span>
+        <span>140+ решений в продакшене</span>
+      </div>
+      <div class="hero__letters"><span>O</span><span>R</span><span>B</span><span>I</span><span>T</span><span>A</span></div>
+    </div>
+
+    <canvas class="hero__orb" id="orb" aria-hidden="true"></canvas>
+    <div class="hero__fallback" aria-hidden="true"></div>
+
+    <div class="hero__content wrap">
+      <div class="hero__intro">
+        <h1 class="hero__title">Делаем ИИ, который приносит деньги, а&nbsp;не&nbsp;слайды</h1>
+        <p class="hero__lead">Находим процессы, где нейросети дают измеримый эффект, и&nbsp;доводим решение до&nbsp;продакшена за&nbsp;<span class="nowrap">6–10 недель</span>.</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#contact">Обсудить проект</a>
+          <a class="btn btn--ghost" href="#cases">Посмотреть кейсы</a>
+        </div>
+      </div>
+
+      <form class="audit" id="auditForm" novalidate>
+        <h2 class="audit__title">Бесплатный <span class="nowrap">ИИ-аудит</span></h2>
+        <p class="audit__text">Оставьте почту. За&nbsp;48&nbsp;часов пришлём список задач, которые в&nbsp;вашей компании можно передать ИИ, с&nbsp;оценкой экономии.</p>
+        <div class="audit__field">
+          <label class="sr-only" for="auditEmail">Рабочая почта</label>
+          <input id="auditEmail" name="email" type="email" placeholder="you@company.ru" autocomplete="email" required>
+          <button type="submit" aria-label="Получить аудит"><svg><use href="#i-arrow"/></svg></button>
+        </div>
+        <p class="audit__msg" id="auditMsg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+
+    <a class="seal" href="#contact" aria-label="Начать проект">
+      <svg class="seal__ring" viewBox="0 0 140 140" aria-hidden="true">
+        <defs><path id="sealPath" d="M70,70 m-54,0 a54,54 0 1,1 108,0 a54,54 0 1,1 -108,0"/></defs>
+        <text><textPath href="#sealPath" textLength="336">начать проект • начать проект • </textPath></text>
+      </svg>
+      <span class="seal__core"><svg><use href="#i-arrow"/></svg></span>
+    </a>
+  </section>
+
+  <!-- Клиенты -->
+  <section class="clients" aria-label="Клиенты">
+    <div class="wrap clients__inner">
+      <p class="clients__label">Работаем с&nbsp;ритейлом, логистикой, финансами и&nbsp;производством</p>
+      <ul class="clients__list">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18 12 4l8 14Z" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Норд&nbsp;Ритейл</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>Кварц</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Линия&nbsp;Логистик</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="1.8" transform="rotate(45 12 12)"/></svg>Финполе</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19V5l7 7 7-7v14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Медиана</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9h-9Z" fill="currentColor"/></svg>Упакс</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- О нас -->
+  <section class="about section" id="about" aria-labelledby="aboutTitle">
+    <div class="wrap">
+      <h2 class="sr-only" id="aboutTitle">О компании</h2>
+      <p class="about__statement">Мы&nbsp;— 38&nbsp;инженеров, <span class="nowrap">дата-сайентистов</span> и&nbsp;продуктовых дизайнеров. Не&nbsp;продаём <span class="nowrap">«ИИ ради ИИ»</span>: сначала считаем экономику, потом пишем код. Поэтому наши решения окупаются в&nbsp;среднем за&nbsp;пять месяцев и&nbsp;остаются в&nbsp;работе годами.</p>
+
+      <dl class="stats">
+        <div class="stats__item">
+          <dt>решений работают у&nbsp;клиентов прямо сейчас</dt>
+          <dd><span data-count="140">140</span>+</dd>
+        </div>
+        <div class="stats__item">
+          <dt>клиентов продолжают работу после первого проекта</dt>
+          <dd><span data-count="98">98</span>%</dd>
+        </div>
+        <div class="stats__item">
+          <dt>месяцев в&nbsp;среднем до&nbsp;окупаемости</dt>
+          <dd><span data-count="5">5</span></dd>
+        </div>
+        <div class="stats__item">
+          <dt>дня от&nbsp;брифа до&nbsp;первого релиза</dt>
+          <dd><span data-count="42">42</span></dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- Услуги -->
+  <section class="services section" id="services" aria-labelledby="servicesTitle">
+    <div class="wrap services__layout">
+      <div class="services__head">
+        <h2 class="h2" id="servicesTitle">Что мы делаем</h2>
+        <p class="services__note">Берём задачу целиком: от&nbsp;поиска сценария до&nbsp;поддержки в&nbsp;продакшене. Можно начать с&nbsp;любого этапа.</p>
+      </div>
+
+      <ul class="services__list">
+        <li class="service">
+          <h3 class="service__title">Аудит и&nbsp;<span class="nowrap">ИИ-стратегия</span></h3>
+          <p class="service__text">Разбираем процессы, данные и&nbsp;цели. На&nbsp;выходе&nbsp;— 10–15 сценариев с&nbsp;расчётом эффекта и&nbsp;план внедрения на&nbsp;год.</p>
+          <ul class="tags"><li>2 недели</li><li>расчёт окупаемости</li><li>дорожная карта</li></ul>
+        </li>
+        <li class="service">
+          <h3 class="service__title">ИИ-ассистенты</h3>
+          <p class="service__text">Боты для поддержки, продаж и&nbsp;HR. Отвечают по&nbsp;вашей базе знаний, передают сложные вопросы людям и&nbsp;сами заполняют CRM.</p>
+          <ul class="tags"><li>сайт и&nbsp;Telegram</li><li>amoCRM, Битрикс24</li><li>база знаний</li></ul>
+        </li>
+        <li class="service">
+          <h3 class="service__title">Агенты и&nbsp;автоматизация</h3>
+          <p class="service__text">Агенты разбирают письма, заявки и&nbsp;документы, вносят данные в&nbsp;1С и&nbsp;запускают процессы без участия сотрудников.</p>
+          <ul class="tags"><li>1С и&nbsp;ERP</li><li>распознавание документов</li><li>почта</li></ul>
+        </li>
+        <li class="service">
+          <h3 class="service__title">Компьютерное зрение</h3>
+          <p class="service__text">Контроль качества на&nbsp;линии, подсчёт товара на&nbsp;полках, распознавание номеров и&nbsp;документов по&nbsp;видео.</p>
+          <ul class="tags"><li>камеры на&nbsp;производстве</li><li>выкладка в&nbsp;магазинах</li></ul>
+        </li>
+        <li class="service">
+          <h3 class="service__title">Прогнозная аналитика</h3>
+          <p class="service__text">Модели спроса, оттока и&nbsp;цен на&nbsp;ваших данных. С&nbsp;дашбордом, в&nbsp;котором разберутся не&nbsp;только аналитики.</p>
+          <ul class="tags"><li>спрос и&nbsp;закупки</li><li>отток клиентов</li><li>ценообразование</li></ul>
+        </li>
+        <li class="service">
+          <h3 class="service__title">Генерация контента</h3>
+          <p class="service__text">Карточки товаров, баннеры и&nbsp;видео в&nbsp;стиле бренда. Сотни единиц контента в&nbsp;день вместо десятков в&nbsp;месяц.</p>
+          <ul class="tags"><li>маркетплейсы</li><li>реклама</li><li>фирменный стиль</li></ul>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Процесс -->
+  <section class="process section" id="process" aria-labelledby="processTitle">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="h2" id="processTitle">Четыре шага от&nbsp;идеи до&nbsp;результата</h2>
+        <p>На&nbsp;каждом шаге заранее договариваемся о&nbsp;метриках. Если цифры не&nbsp;сходятся, останавливаемся, а&nbsp;не&nbsp;продолжаем тратить ваш бюджет.</p>
+      </div>
+
+      <ol class="steps">
+        <li class="step">
+          <span class="step__num">1</span>
+          <h3 class="step__title">Диагностика</h3>
+          <p class="step__time">1–2 недели</p>
+          <p class="step__text">Интервью с&nbsp;командой, анализ данных и&nbsp;процессов. Выбираем 2–3 сценария с&nbsp;самой быстрой окупаемостью.</p>
+          <p class="step__result">Вы получаете карту возможностей с&nbsp;расчётом эффекта</p>
+        </li>
+        <li class="step">
+          <span class="step__num">2</span>
+          <h3 class="step__title">Прототип</h3>
+          <p class="step__time">2–3 недели</p>
+          <p class="step__text">Собираем рабочую версию на&nbsp;ваших данных и&nbsp;проверяем качество на&nbsp;согласованных метриках.</p>
+          <p class="step__result">Вы получаете прототип и&nbsp;отчёт о&nbsp;точности</p>
+        </li>
+        <li class="step">
+          <span class="step__num">3</span>
+          <h3 class="step__title">Внедрение</h3>
+          <p class="step__time">3–6 недель</p>
+          <p class="step__text">Интеграции с&nbsp;CRM и&nbsp;ERP, права доступа, журналирование, нагрузочные тесты, обучение сотрудников.</p>
+          <p class="step__result">Вы получаете решение в&nbsp;рабочей среде</p>
+        </li>
+        <li class="step">
+          <span class="step__num">4</span>
+          <h3 class="step__title">Развитие</h3>
+          <p class="step__time">постоянно</p>
+          <p class="step__text">Следим за&nbsp;качеством, дообучаем модели и&nbsp;переносим решение на&nbsp;соседние процессы.</p>
+          <p class="step__result">Вы получаете ежемесячный отчёт по&nbsp;метрикам</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Кейсы -->
+  <section class="cases section" id="cases" aria-labelledby="casesTitle">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="h2" id="casesTitle">Что уже работает у&nbsp;клиентов</h2>
+        <p>Четыре проекта из&nbsp;последних двенадцати месяцев. Названия компаний скрыты по&nbsp;NDA, цифры&nbsp;— из&nbsp;их отчётов.</p>
+      </div>
+
+      <div class="cases__grid">
+        <article class="case case--wide">
+          <div class="case__art art-chat" aria-hidden="true">
+            <div class="bubble bubble--in">Здравствуйте! Где мой заказ 48213? Обещали вчера</div>
+            <div class="bubble bubble--out">Заказ уже у&nbsp;курьера, он&nbsp;приедет сегодня с&nbsp;14:00 до&nbsp;16:00. Извините за&nbsp;задержку: начислил вам 300 бонусов.</div>
+            <div class="bubble bubble--in">Спасибо, удобно</div>
+          </div>
+          <div class="case__body">
+            <p class="case__client">Сеть магазинов электроники</p>
+            <h3 class="case__title">Ассистент поддержки на&nbsp;сайте и&nbsp;в&nbsp;Telegram</h3>
+            <p class="case__metric"><strong>72%</strong> обращений закрываются без оператора</p>
+          </div>
+        </article>
+
+        <article class="case">
+          <div class="case__art art-chart" aria-hidden="true">
+            <svg viewBox="0 0 400 180" preserveAspectRatio="none">
+              <defs><linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff6a1a" stop-opacity=".35"/><stop offset="1" stop-color="#ff6a1a" stop-opacity="0"/></linearGradient></defs>
+              <path class="chart-area" d="M0 120 C30 112 50 132 80 118 S130 84 160 96 S210 70 240 78 L240 180 L0 180Z" fill="url(#chartFill)"/>
+              <path class="chart-line" pathLength="1" d="M0 120 C30 112 50 132 80 118 S130 84 160 96 S210 70 240 78" fill="none" stroke="#ff6a1a" stroke-width="2.5"/>
+              <path class="chart-forecast" d="M240 78 C270 86 300 58 330 62 S380 40 400 44" fill="none" stroke="#ede7df" stroke-width="2" stroke-dasharray="6 6" opacity=".6"/>
+              <circle class="chart-dot" cx="240" cy="78" r="5" fill="#ff6a1a"/>
+            </svg>
+            <span class="art-chart__label">прогноз на&nbsp;14&nbsp;дней</span>
+          </div>
+          <div class="case__body">
+            <p class="case__client">Логистический оператор</p>
+            <h3 class="case__title">Прогноз спроса для 40&nbsp;складов</h3>
+            <p class="case__metric"><strong>−23%</strong> складских остатков за&nbsp;квартал</p>
+          </div>
+        </article>
+
+        <article class="case">
+          <div class="case__art art-docs" aria-hidden="true">
+            <div class="doc doc--back"></div>
+            <div class="doc">
+              <i style="width:60%"></i><i></i><i style="width:80%"></i><i class="hl" style="width:45%"></i><i></i><i style="width:70%"></i>
+            </div>
+            <span class="art-docs__chip">паспорт проверен за&nbsp;1,4&nbsp;с</span>
+          </div>
+          <div class="case__body">
+            <p class="case__client">Микрофинансовая компания</p>
+            <h3 class="case__title">Проверка документов заёмщика</h3>
+            <p class="case__metric"><strong>90&nbsp;секунд</strong> вместо 40&nbsp;минут на&nbsp;анкету</p>
+          </div>
+        </article>
+
+        <article class="case case--wide">
+          <div class="case__art art-vision" aria-hidden="true">
+            <div class="belt">
+              <span class="item"><b>норма</b></span>
+              <span class="item"><b>норма</b></span>
+              <span class="item item--bad"><b>брак, 98,7%</b></span>
+              <span class="item"><b>норма</b></span>
+              <span class="item"><b>норма</b></span>
+            </div>
+          </div>
+          <div class="case__body">
+            <p class="case__client">Производство упаковки</p>
+            <h3 class="case__title">Контроль брака на&nbsp;конвейере</h3>
+            <p class="case__metric"><strong>99,2%</strong> дефектов находит камера, а&nbsp;не&nbsp;клиент</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Отзывы -->
+  <section class="reviews section" aria-labelledby="reviewsTitle">
+    <div class="wrap reviews__layout">
+      <div class="reviews__aside">
+        <h2 class="h2" id="reviewsTitle">Отзывы</h2>
+        <div class="rating">
+          <p class="rating__value">4,9</p>
+          <div class="rating__stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div>
+          <p class="rating__note">средняя оценка клиентов по&nbsp;итогам 60&nbsp;проектов</p>
+        </div>
+      </div>
+
+      <div class="quote" id="quote">
+        <div class="quote__slides" aria-live="polite">
+          <figure class="quote__slide is-active">
+            <blockquote>Боялись, что получим ещё одного бота, который всех раздражает. В&nbsp;итоге ассистент закрывает семь обращений из&nbsp;десяти, а&nbsp;оценка поддержки выросла с&nbsp;4,1 до&nbsp;4,7.</blockquote>
+            <figcaption><span class="avatar">АК</span><span><b>Анна Ковалёва</b>директор клиентского сервиса, сеть магазинов электроники</span></figcaption>
+          </figure>
+          <figure class="quote__slide">
+            <blockquote>Первый прототип показали через три недели. Прогноз оказался точнее нашей прошлой модели на&nbsp;18%, и, что важнее, логистам с&nbsp;ним удобно работать.</blockquote>
+            <figcaption><span class="avatar">ДО</span><span><b>Дмитрий Орлов</b>операционный директор, логистический оператор</span></figcaption>
+          </figure>
+          <figure class="quote__slide">
+            <blockquote>Нам не&nbsp;обещали чудес. Честно сказали, где ИИ не&nbsp;поможет, и&nbsp;этим сэкономили полгода экспериментов.</blockquote>
+            <figcaption><span class="avatar">МС</span><span><b>Мария Сергеева</b>генеральный директор, финтех-компания</span></figcaption>
+          </figure>
+        </div>
+        <div class="quote__nav">
+          <button type="button" class="round-btn" data-dir="-1" aria-label="Предыдущий отзыв"><svg><use href="#i-left"/></svg></button>
+          <span class="quote__count"><span id="quoteIndex">1</span> из&nbsp;3</span>
+          <button type="button" class="round-btn" data-dir="1" aria-label="Следующий отзыв"><svg><use href="#i-right"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Стоимость -->
+  <section class="pricing section" id="pricing" aria-labelledby="pricingTitle">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="h2" id="pricingTitle">Сколько это стоит</h2>
+        <p>Фиксируем цену и&nbsp;сроки до&nbsp;старта. Точную смету назовём после бесплатной встречи на&nbsp;40&nbsp;минут.</p>
+      </div>
+
+      <div class="plans">
+        <article class="plan">
+          <h3 class="plan__name">Аудит</h3>
+          <p class="plan__for">Чтобы понять, где ИИ даст эффект именно вам</p>
+          <p class="plan__price">от&nbsp;190&nbsp;000&nbsp;₽</p>
+          <p class="plan__time">2 недели</p>
+          <ul class="plan__list">
+            <li><svg><use href="#i-check"/></svg>Аудит процессов и&nbsp;данных</li>
+            <li><svg><use href="#i-check"/></svg>10–15 сценариев с&nbsp;расчётом окупаемости</li>
+            <li><svg><use href="#i-check"/></svg>Дорожная карта на&nbsp;12&nbsp;месяцев</li>
+            <li><svg><use href="#i-check"/></svg>Презентация для руководства</li>
+          </ul>
+          <a class="btn btn--ghost btn--block" href="#contact" data-plan="Аудит">Заказать аудит</a>
+        </article>
+
+        <article class="plan plan--main">
+          <p class="plan__badge">Чаще всего выбирают</p>
+          <h3 class="plan__name">Решение под ключ</h3>
+          <p class="plan__for">Запуск одного ИИ-решения от&nbsp;прототипа до&nbsp;продакшена</p>
+          <p class="plan__price">от&nbsp;950&nbsp;000&nbsp;₽</p>
+          <p class="plan__time">6–10 недель</p>
+          <ul class="plan__list">
+            <li><svg><use href="#i-check"/></svg>Всё, что входит в&nbsp;аудит</li>
+            <li><svg><use href="#i-check"/></svg>Прототип на&nbsp;ваших данных</li>
+            <li><svg><use href="#i-check"/></svg>Интеграция с&nbsp;CRM, ERP и&nbsp;1С</li>
+            <li><svg><use href="#i-check"/></svg>Обучение сотрудников</li>
+            <li><svg><use href="#i-check"/></svg>Три месяца поддержки</li>
+          </ul>
+          <a class="btn btn--primary btn--block" href="#contact" data-plan="Решение под ключ">Запустить решение</a>
+        </article>
+
+        <article class="plan">
+          <h3 class="plan__name">Выделенная команда</h3>
+          <p class="plan__for">Для компаний, которые развивают ИИ постоянно</p>
+          <p class="plan__price">от&nbsp;400&nbsp;000&nbsp;₽<small>/мес</small></p>
+          <p class="plan__time">от&nbsp;3&nbsp;месяцев</p>
+          <ul class="plan__list">
+            <li><svg><use href="#i-check"/></svg>Продакт, ML-инженер и&nbsp;разработчик</li>
+            <li><svg><use href="#i-check"/></svg>Несколько проектов параллельно</li>
+            <li><svg><use href="#i-check"/></svg>Мониторинг качества 24/7</li>
+            <li><svg><use href="#i-check"/></svg>Ежемесячный отчёт по&nbsp;эффекту</li>
+          </ul>
+          <a class="btn btn--ghost btn--block" href="#contact" data-plan="Выделенная команда">Собрать команду</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Вопросы -->
+  <section class="faq section" id="faq" aria-labelledby="faqTitle">
+    <div class="wrap faq__layout">
+      <div class="faq__head">
+        <h2 class="h2" id="faqTitle">Частые вопросы</h2>
+        <p>Не&nbsp;нашли свой? Напишите в&nbsp;<a href="https://t.me/" target="_blank" rel="noopener">Telegram</a>, ответим в&nbsp;течение часа в&nbsp;рабочее время.</p>
+      </div>
+
+      <div class="faq__list">
+        <details class="qa">
+          <summary>Сколько стоит внедрить ИИ?<span class="qa__icon" aria-hidden="true"><svg><use href="#i-plus"/></svg></span></summary>
+          <p>Зависит от&nbsp;задачи. Аудит стоит от&nbsp;190&nbsp;000&nbsp;₽, запуск одного решения&nbsp;— от&nbsp;950&nbsp;000&nbsp;₽. Точную смету даём после бесплатной встречи, на&nbsp;которой разбираем вашу задачу.</p>
+        </details>
+        <details class="qa">
+          <summary>У&nbsp;нас мало данных. Это проблема?<span class="qa__icon" aria-hidden="true"><svg><use href="#i-plus"/></svg></span></summary>
+          <p>Чаще всего нет. Языковым моделям достаточно вашей базы знаний, регламентов и&nbsp;истории переписки с&nbsp;клиентами. Если данных правда не&nbsp;хватает, поможем наладить их сбор.</p>
+        </details>
+        <details class="qa">
+          <summary>Как вы защищаете наши данные?<span class="qa__icon" aria-hidden="true"><svg><use href="#i-plus"/></svg></span></summary>
+          <p>Работаем по&nbsp;NDA и&nbsp;152-ФЗ. Можем развернуть модели в&nbsp;вашем контуре или в&nbsp;российском облаке и&nbsp;использовать отечественные модели: YandexGPT и&nbsp;GigaChat.</p>
+        </details>
+        <details class="qa">
+          <summary>Сколько длится проект?<span class="qa__icon" aria-hidden="true"><svg><use href="#i-plus"/></svg></span></summary>
+          <p>Первый результат вы&nbsp;увидите через три недели, решение в&nbsp;продакшене&nbsp;— через 6–10 недель. Аудит занимает две недели.</p>
+        </details>
+        <details class="qa">
+          <summary>Что будет, если ИИ ошибётся?<span class="qa__icon" aria-hidden="true"><svg><use href="#i-plus"/></svg></span></summary>
+          <p>До&nbsp;запуска мы&nbsp;договариваемся о&nbsp;допустимом уровне ошибок, ставим проверки и&nbsp;передаём сложные случаи человеку. Все ответы сохраняются, качество проверяем каждую неделю.</p>
+        </details>
+        <details class="qa">
+          <summary>Вы работаете с&nbsp;небольшими компаниями?<span class="qa__icon" aria-hidden="true"><svg><use href="#i-plus"/></svg></span></summary>
+          <p>Да, примерно треть наших клиентов&nbsp;— компании до&nbsp;100 сотрудников. С&nbsp;ними обычно начинаем с&nbsp;одного сценария, который быстро окупается.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Заявка -->
+  <section class="contact section" id="contact" aria-labelledby="contactTitle">
+    <div class="wrap">
+      <div class="contact__panel">
+        <div class="contact__info">
+          <h2 class="h2" id="contactTitle">Расскажите о&nbsp;задаче</h2>
+          <p class="contact__lead">В&nbsp;течение рабочего дня с&nbsp;вами свяжется руководитель проектов. Первая встреча бесплатная и&nbsp;ни&nbsp;к&nbsp;чему не&nbsp;обязывает.</p>
+          <ul class="contact__list">
+            <li><span>Почта</span><a href="mailto:hello@orbita.ai">hello@orbita.ai</a></li>
+            <li><span>Telegram</span><a href="https://t.me/" target="_blank" rel="noopener">@orbita_studio</a></li>
+            <li><span>Телефон</span><a href="tel:+74950000000">+7&nbsp;495&nbsp;000-00-00</a></li>
+          </ul>
+        </div>
+
+        <form class="form" id="contactForm" novalidate>
+          <div class="form__row">
+            <div class="field">
+              <label for="fName">Как к&nbsp;вам обращаться</label>
+              <input id="fName" name="name" type="text" autocomplete="name" required>
+              <span class="field__error">Укажите имя</span>
+            </div>
+            <div class="field">
+              <label for="fCompany">Компания</label>
+              <input id="fCompany" name="company" type="text" autocomplete="organization">
+            </div>
+          </div>
+          <div class="field">
+            <label for="fContact">Телефон или Telegram</label>
+            <input id="fContact" name="contact" type="text" autocomplete="tel" required>
+            <span class="field__error">Оставьте телефон или ник в&nbsp;Telegram, чтобы мы&nbsp;могли ответить</span>
+          </div>
+          <fieldset class="field">
+            <legend>Что интересует</legend>
+            <div class="chips">
+              <label class="chip"><input type="checkbox" name="topic" value="Аудит"><span>Аудит</span></label>
+              <label class="chip"><input type="checkbox" name="topic" value="Ассистент"><span>Ассистент</span></label>
+              <label class="chip"><input type="checkbox" name="topic" value="Автоматизация"><span>Автоматизация</span></label>
+              <label class="chip"><input type="checkbox" name="topic" value="Компьютерное зрение"><span>Компьютерное зрение</span></label>
+              <label class="chip"><input type="checkbox" name="topic" value="Аналитика"><span>Аналитика</span></label>
+              <label class="chip"><input type="checkbox" name="topic" value="Пока не знаю"><span>Пока не&nbsp;знаю</span></label>
+            </div>
+          </fieldset>
+          <div class="field">
+            <label for="fTask">Коротко о&nbsp;задаче <span class="field__opt">необязательно</span></label>
+            <textarea id="fTask" name="task" rows="4" placeholder="Например: операторы тратят половину дня на&nbsp;одни и&nbsp;те&nbsp;же вопросы"></textarea>
+          </div>
+          <button class="btn btn--primary btn--block btn--lg" type="submit">Отправить заявку</button>
+          <p class="form__legal">Нажимая кнопку, вы&nbsp;соглашаетесь с&nbsp;<a href="#">политикой обработки персональных данных</a>.</p>
+        </form>
+
+        <div class="form-done" id="formDone" hidden tabindex="-1">
+          <span class="form-done__icon"><svg><use href="#i-check"/></svg></span>
+          <h3>Заявка отправлена</h3>
+          <p>Руководитель проектов свяжется с&nbsp;вами в&nbsp;течение рабочего дня.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a class="logo" href="#top" aria-label="ORBITA, наверх">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><use href="#i-logo"/></svg>
+          <span>ORBITA</span>
+        </a>
+        <p>Внедряем искусственный интеллект в&nbsp;бизнес с&nbsp;2019 года.</p>
+        <div class="socials">
+          <a href="https://t.me/" target="_blank" rel="noopener" aria-label="Telegram"><svg><use href="#i-tg"/></svg></a>
+          <a href="https://vk.com/" target="_blank" rel="noopener" aria-label="ВКонтакте"><svg><use href="#i-vk"/></svg></a>
+          <a href="https://youtube.com/" target="_blank" rel="noopener" aria-label="YouTube"><svg><use href="#i-yt"/></svg></a>
+        </div>
+      </div>
+      <nav class="footer__col" aria-label="Разделы">
+        <p>Разделы</p>
+        <a href="#services">Услуги</a><a href="#process">Как работаем</a><a href="#cases">Кейсы</a><a href="#pricing">Стоимость</a><a href="#faq">Вопросы</a>
+      </nav>
+      <div class="footer__col">
+        <p>Услуги</p>
+        <a href="#services">ИИ-ассистенты</a><a href="#services">Автоматизация</a><a href="#services">Компьютерное зрение</a><a href="#services">Прогнозная аналитика</a>
+      </div>
+      <div class="footer__col">
+        <p>Контакты</p>
+        <a href="mailto:hello@orbita.ai">hello@orbita.ai</a><a href="tel:+74950000000">+7&nbsp;495&nbsp;000-00-00</a><span>Москва, Пресненская наб., 12</span>
+      </div>
+    </div>
+    <div class="footer__stage" aria-hidden="true">
+      <div class="footer__word">ORBITA</div>
+      <div class="footer__orbit"><i></i></div>
+      <div class="footer__planet"></div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2019–2026 ORBITA</span>
+      <a href="#">Политика конфиденциальности</a>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="Наверх"><svg><use href="#i-up"/></svg></button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
